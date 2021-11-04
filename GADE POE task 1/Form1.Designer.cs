@@ -37,7 +37,7 @@ namespace GADE_POE_task_1
             this.buttonLEFT1 = new System.Windows.Forms.Button();
             this.buttonDown1 = new System.Windows.Forms.Button();
             this.groupBoxAttacking = new System.Windows.Forms.GroupBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox_Item_Pickup = new System.Windows.Forms.RichTextBox();
             this.attack_richTextBox = new System.Windows.Forms.RichTextBox();
             this.button_Attack = new System.Windows.Forms.Button();
             this.groupBox_Player_Stats = new System.Windows.Forms.GroupBox();
@@ -101,7 +101,7 @@ namespace GADE_POE_task_1
             // 
             // groupBoxAttacking
             // 
-            this.groupBoxAttacking.Controls.Add(this.richTextBox2);
+            this.groupBoxAttacking.Controls.Add(this.richTextBox_Item_Pickup);
             this.groupBoxAttacking.Controls.Add(this.attack_richTextBox);
             this.groupBoxAttacking.Controls.Add(this.button_Attack);
             this.groupBoxAttacking.Location = new System.Drawing.Point(552, 108);
@@ -112,13 +112,13 @@ namespace GADE_POE_task_1
             this.groupBoxAttacking.Text = "Attacking";
             this.groupBoxAttacking.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // richTextBox2
+            // richTextBox_Item_Pickup
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(6, 205);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(204, 59);
-            this.richTextBox2.TabIndex = 2;
-            this.richTextBox2.Text = "";
+            this.richTextBox_Item_Pickup.Location = new System.Drawing.Point(6, 205);
+            this.richTextBox_Item_Pickup.Name = "richTextBox_Item_Pickup";
+            this.richTextBox_Item_Pickup.Size = new System.Drawing.Size(204, 59);
+            this.richTextBox_Item_Pickup.TabIndex = 2;
+            this.richTextBox_Item_Pickup.Text = "";
             // 
             // attack_richTextBox
             // 
@@ -204,7 +204,7 @@ namespace GADE_POE_task_1
         private System.Windows.Forms.Button buttonDown1;
         private System.Windows.Forms.GroupBox groupBoxAttacking;
         private System.Windows.Forms.Button button_Attack;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox richTextBox_Item_Pickup;
         private System.Windows.Forms.RichTextBox attack_richTextBox;
         private System.Windows.Forms.GroupBox groupBox_Player_Stats;
         private System.Windows.Forms.RichTextBox richTextBox_Player_Stats;
