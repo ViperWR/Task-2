@@ -17,7 +17,6 @@ namespace GADE_POE_task_1
         int directions = 0;
         int directions_A = 0;
         int enemy = 0;
-        int close_Enemy;
 
         List<String> goblins_List = new List<string>();
         List<String> mage_List = new List<string>();
@@ -86,10 +85,11 @@ namespace GADE_POE_task_1
         }
         private void update_P_Stats()
         {
-            richTextBox_Player_Stats.Text = "Player Stats:" + "\n HP: " + 100 + "\n Damage: 2" + "\n [" + map11.hero_Coords_X + "," + map11.hero_Coords_Y + "]";
+            richTextBox_Player_Stats.Text = "Player Stats:" + "\n HP: " + hero_HP + "/" + hero_Max_HP + "\n Damage: 2" + "\n [" + map11.hero_Coords_X + "," + map11.hero_Coords_Y + "]";
         }
         private void moveHero()
         {
+            check_Lost();
             switch (directions)
             {
                 case 1:                //left
@@ -101,7 +101,6 @@ namespace GADE_POE_task_1
                             map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y - 1] = "H";
                             map11.hero_Coords_Y -= 1;
                         }
-                        update_P_Stats();
                         update_Map();
                     }
 
@@ -116,7 +115,6 @@ namespace GADE_POE_task_1
                             map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y + 1] = "H";
                             map11.hero_Coords_Y += 1;
                         }
-                        update_P_Stats();
                         update_Map();
                     }
                     directions = 0;
@@ -130,7 +128,6 @@ namespace GADE_POE_task_1
                             map11.map_Arr[map11.hero_Coords_X - 1, map11.hero_Coords_Y] = "H";
                             map11.hero_Coords_X -= 1;
                         }
-                        update_P_Stats();
                         update_Map();
                     }
                     directions = 0;
@@ -144,7 +141,6 @@ namespace GADE_POE_task_1
                             map11.map_Arr[map11.hero_Coords_X + 1, map11.hero_Coords_Y] = "H";
                             map11.hero_Coords_X += 1;
                         }
-                        update_P_Stats();
                         update_Map();
                     }
                     directions = 0;                //gets set to 0 so the player stops moving
@@ -535,12 +531,14 @@ namespace GADE_POE_task_1
         private void button1_Click(object sender, EventArgs e)
         {
             update_Map();
+            update_P_Stats();
         }
         private void buttonUP1_Click(object sender, EventArgs e)
         {
             directions = 3;
             moveHero();
             check_Range();
+            update_P_Stats();
         }
 
         private void buttonLEFT1_Click(object sender, EventArgs e)
@@ -548,6 +546,7 @@ namespace GADE_POE_task_1
             directions = 1;
             moveHero();
             check_Range();
+            update_P_Stats();
         }
 
         private void buttonDown1_Click(object sender, EventArgs e)
@@ -555,6 +554,7 @@ namespace GADE_POE_task_1
             directions = 4;
             moveHero();
             check_Range();
+            update_P_Stats();
         }
 
         private void buttonRIGHT1_Click(object sender, EventArgs e)
@@ -562,6 +562,7 @@ namespace GADE_POE_task_1
             directions = 2;
             moveHero();
             check_Range();
+            update_P_Stats();
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -569,14 +570,43 @@ namespace GADE_POE_task_1
 
         }
 
+        private void richTextBox_Player_Stats_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void button_Attack_Click(object sender, EventArgs e)
         {
             attack_Enemy();
+            check_Win();
         }
 
         private void select_enemy_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+        public void check_Win()
+        {
+            for (int i = 0; i < map11.map_Width; i++)
+            {
+                for (int n = 0; n < map11.map_Height; n++)
+                {
+                    if (map11.map_Arr[i, n] == "G" || map11.map_Arr[i, n] == "M")
+                    {
+                        goto mojo;
+                    }
+                }
+            }
+            MessageBox.Show("congratulations" + '\n' + "You won");
+            mojo:
+            return;
+        }
+        public void check_Lost()
+        {
+            if (hero_HP <= 0)
+            {
+                MessageBox.Show("You have lost");
+            }
         }
     }
     //Question 2.1
@@ -875,14 +905,12 @@ namespace GADE_POE_task_1
                     done_2 = true;
                 }
             }
-        }
-
+        }       
     }
     //question 3.3
     public class GameEngine
     {
         map map11 = new map();
-        private int Map;
         public bool goRight, goLeft, goUp, goDown;
 
         public GameEngine()

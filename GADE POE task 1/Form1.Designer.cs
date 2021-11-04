@@ -155,6 +155,7 @@ namespace GADE_POE_task_1
             this.richTextBox_Player_Stats.Size = new System.Drawing.Size(204, 68);
             this.richTextBox_Player_Stats.TabIndex = 0;
             this.richTextBox_Player_Stats.Text = "";
+            this.richTextBox_Player_Stats.TextChanged += new System.EventHandler(this.richTextBox_Player_Stats_TextChanged);
             // 
             // select_enemy
             // 
