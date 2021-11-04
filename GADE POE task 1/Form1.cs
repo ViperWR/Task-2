@@ -85,7 +85,7 @@ namespace GADE_POE_task_1
         }
         private void update_P_Stats()
         {
-            richTextBox_Player_Stats.Text = "Player Stats:" + "\n HP: " + hero_HP + "/" + hero_Max_HP + "\n Damage: 2" + "\n [" + map11.hero_Coords_X + "," + map11.hero_Coords_Y + "]";
+            richTextBox_Player_Stats.Text = "Player Stats:" + "\n HP: " + hero_HP + "/" + hero_Max_HP + "               Gold : " + gold + "\n Damage: 2" + "\n [" + map11.hero_Coords_X + "," + map11.hero_Coords_Y + "]";
         }
         private void moveHero()
         {
@@ -103,6 +103,7 @@ namespace GADE_POE_task_1
                         }
                         else if (map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y - 1] == "C")
                         {
+                            gold += 1;
                             richTextBox_Item_Pickup.Text = "1 Gold coin added" + '\n' + "======================" + "\n" + richTextBox_Item_Pickup.Text;
                             map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y] = " ";
                             map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y - 1] = "H";
@@ -124,6 +125,7 @@ namespace GADE_POE_task_1
                         }
                         else if (map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y + 1] == "C")
                         {
+                            gold += 1;
                             richTextBox_Item_Pickup.Text = "1 Gold coin added" + '\n' + "======================" + "\n" + richTextBox_Item_Pickup.Text;
                             map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y] = " ";
                             map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y + 1] = "H";
@@ -144,6 +146,7 @@ namespace GADE_POE_task_1
                         }
                         else if (map11.map_Arr[map11.hero_Coords_X - 1, map11.hero_Coords_Y] == "C")
                         {
+                            gold += 1;
                             richTextBox_Item_Pickup.Text = "1 Gold coin added" + '\n' + "======================" + "\n" + richTextBox_Item_Pickup.Text;
                             map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y] = " ";
                             map11.map_Arr[map11.hero_Coords_X - 1, map11.hero_Coords_Y] = "H";
@@ -164,6 +167,7 @@ namespace GADE_POE_task_1
                         }
                         else if (map11.map_Arr[map11.hero_Coords_X + 1, map11.hero_Coords_Y] == "C")
                         {
+                            gold += 1;
                             richTextBox_Item_Pickup.Text = "1 Gold coin added" + '\n' + "======================" + "\n" + richTextBox_Item_Pickup.Text;
                             map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y] = " ";
                             map11.map_Arr[map11.hero_Coords_X + 1, map11.hero_Coords_Y] = "H";
