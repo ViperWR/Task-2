@@ -189,7 +189,7 @@ namespace GADE_POE_task_1
             {
                 for (int n = 0; n < map11.map_Height; n++)
                 {
-                    direction_G = ran_D.Next(0, 5);
+                    direction_G = ran_D.Next(0, 5);                   
 
                     if (map11.map_Arr[i, n] == "G")
                     {
@@ -200,7 +200,14 @@ namespace GADE_POE_task_1
                                 map11.map_Arr[i - 1, n] = "G";
                                 map11.map_Arr[i, n] = " ";
 
-                                //map11.enemies_Coords_X[i] -= 1;
+                                for (int b = 0; b < 5; b++)
+                                {
+                                    string temp_GB = i + "," + n;
+                                    if (goblins_List.ElementAtOrDefault(b) == temp_GB)
+                                    {
+                                        map11.enemies_Coords_X[b] -= 1;
+                                    }
+                                }
                             }
                         }
                         if (direction_G == 2)                  // down
@@ -210,7 +217,14 @@ namespace GADE_POE_task_1
                                 map11.map_Arr[i + 1, n] = "G";
                                 map11.map_Arr[i, n] = " ";
 
-                                //map11.enemies_Coords_X[i] += 1;
+                                for (int b = 0; b < 5; b++)
+                                {
+                                    string temp_GB = i + "," + n;
+                                    if (goblins_List.ElementAtOrDefault(b) == temp_GB)
+                                    {
+                                        map11.enemies_Coords_X[b] += 1;
+                                    }
+                                }
                             }
                         }
                         if (direction_G == 3)                    //left
@@ -220,31 +234,36 @@ namespace GADE_POE_task_1
                                 map11.map_Arr[i, n - 1] = "G";
                                 map11.map_Arr[i, n] = " ";
 
-                                //map11.enemies_Coords_Y[i] -= 1;
+                                for (int b = 0; b < 5; b++)
+                                {
+                                    string temp_GB = i + "," + n;
+                                    if (goblins_List.ElementAtOrDefault(b) == temp_GB)
+                                    {
+                                        map11.enemies_Coords_Y[b] -= 1;
+                                    }
+                                }
                             }
                         }
-                        if (direction_G == 4)
+                        if (direction_G == 4)                    //right
                         {
                             if (map11.map_Arr[i, n + 1] == " ")
                             {
                                 map11.map_Arr[i, n + 1] = "G";
                                 map11.map_Arr[i, n] = " ";
 
-                                //map11.enemies_Coords_Y[i] += 1;
+                                for (int b = 0; b < 5; b++)
+                                {
+                                    string temp_GB = i + "," + n;
+                                    if (goblins_List.ElementAtOrDefault(b) == temp_GB)
+                                    {
+                                        map11.enemies_Coords_Y[b] += 1;
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
-
-
-
-            //if (map11.map_Arr[map11.enemies_Coords_X[0] - 1, map11.enemies_Coords_Y[0]] == " ")
-            //{
-            //    goblins_List[1] = Convert.ToString((map11.enemies_Coords_X[0] - 1) + "," + map11.enemies_Coords_Y[0]);
-            //    map11.map_Arr[map11.enemies_Coords_X[0] - 1, map11.enemies_Coords_Y[0]] = "G";
-            //    map11.map_Arr[map11.enemies_Coords_X[0], map11.enemies_Coords_Y[0]] = " ";
-            //}
         }
         private void my_Goblin_List()
         {
