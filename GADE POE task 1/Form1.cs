@@ -23,11 +23,11 @@ namespace GADE_POE_task_1
 
         int c = 0;
 
-        int[,] g_Position = new int[12, 12];
+        int[,] g_Position = new int[20, 20];
         int[] g_Health = new int[5];
         int g_Damage = 1;
 
-        int[,] m_Position = new int[12, 12];
+        int[,] m_Position = new int[20, 20];
         int[] m_Health = new int[5];
         int mage_DMG = 5;
 
@@ -40,8 +40,8 @@ namespace GADE_POE_task_1
         {
             InitializeComponent();
 
-            map11.map_Height = 12;
-            map11.map_Width = 12;
+            map11.map_Height = 20;
+            map11.map_Width = 20;
             map11.enemies_Arr = new int[5];
             map11.map_Arr = new string[map11.map_Width, map11.map_Height];
 
@@ -71,6 +71,10 @@ namespace GADE_POE_task_1
         {
 
         }
+        private void Save()
+        {
+            
+        }
         public void update_Map()
         {
             MapLabel.Text = "";
@@ -85,7 +89,7 @@ namespace GADE_POE_task_1
         }
         private void update_P_Stats()
         {
-            richTextBox_Player_Stats.Text = "Player Stats:" + "\n HP: " + hero_HP + "/" + hero_Max_HP + "\n Damage: 2" + "\n [" + map11.hero_Coords_X + "," + map11.hero_Coords_Y + "]";
+            richTextBox_Player_Stats.Text = "Player Stats:" + "\n HP: " + hero_HP + "/" + hero_Max_HP + "               Gold : " + gold + "\n Damage: 2" + "\n [" + map11.hero_Coords_X + "," + map11.hero_Coords_Y + "]";
         }
         private void moveHero()
         {
@@ -95,6 +99,7 @@ namespace GADE_POE_task_1
                 case 1:                //left
                     if (map11.hero_Coords_Y > 0)
                     {
+                        move_Enemies();
                         if (map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y - 1] == " ")
                         {
                             map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y] = " ";
@@ -103,6 +108,7 @@ namespace GADE_POE_task_1
                         }
                         else if (map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y - 1] == "C")
                         {
+                            gold += 1;
                             richTextBox_Item_Pickup.Text = "1 Gold coin added" + '\n' + "======================" + "\n" + richTextBox_Item_Pickup.Text;
                             map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y] = " ";
                             map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y - 1] = "H";
@@ -116,6 +122,7 @@ namespace GADE_POE_task_1
                 case 2:                //right
                     if (map11.hero_Coords_Y < map11.map_Height - 1)
                     {
+                        move_Enemies();
                         if (map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y + 1] == " ")
                         {
                             map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y] = " ";
@@ -124,6 +131,7 @@ namespace GADE_POE_task_1
                         }
                         else if (map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y + 1] == "C")
                         {
+                            gold += 1;
                             richTextBox_Item_Pickup.Text = "1 Gold coin added" + '\n' + "======================" + "\n" + richTextBox_Item_Pickup.Text;
                             map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y] = " ";
                             map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y + 1] = "H";
@@ -136,6 +144,7 @@ namespace GADE_POE_task_1
                 case 3:                //up
                     if (map11.hero_Coords_X > 0)
                     {
+                        move_Enemies();
                         if (map11.map_Arr[map11.hero_Coords_X - 1, map11.hero_Coords_Y] == " ")
                         {
                             map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y] = " ";
@@ -144,6 +153,7 @@ namespace GADE_POE_task_1
                         }
                         else if (map11.map_Arr[map11.hero_Coords_X - 1, map11.hero_Coords_Y] == "C")
                         {
+                            gold += 1;
                             richTextBox_Item_Pickup.Text = "1 Gold coin added" + '\n' + "======================" + "\n" + richTextBox_Item_Pickup.Text;
                             map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y] = " ";
                             map11.map_Arr[map11.hero_Coords_X - 1, map11.hero_Coords_Y] = "H";
@@ -156,6 +166,7 @@ namespace GADE_POE_task_1
                 case 4:                //down
                     if (map11.hero_Coords_X < map11.map_Width - 1)
                     {
+                        move_Enemies();
                         if (map11.map_Arr[map11.hero_Coords_X + 1, map11.hero_Coords_Y] == " ")
                         {
                             map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y] = " ";
@@ -164,6 +175,7 @@ namespace GADE_POE_task_1
                         }
                         else if (map11.map_Arr[map11.hero_Coords_X + 1, map11.hero_Coords_Y] == "C")
                         {
+                            gold += 1;
                             richTextBox_Item_Pickup.Text = "1 Gold coin added" + '\n' + "======================" + "\n" + richTextBox_Item_Pickup.Text;
                             map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y] = " ";
                             map11.map_Arr[map11.hero_Coords_X + 1, map11.hero_Coords_Y] = "H";
@@ -175,8 +187,127 @@ namespace GADE_POE_task_1
                     return;
             }
         }
+        private void move_Enemies()
+        {
+            Random ran_D = new Random();
+            int direction_G;
+
+            for (int i = 0; i < map11.map_Width; i++)
+            {
+                for (int n = 0; n < map11.map_Height; n++)
+                {
+                    direction_G = ran_D.Next(0, 5);                   
+
+                    if (map11.map_Arr[i, n] == "G")
+                    {
+                        if (direction_G == 1)                  //up
+                        {
+                            if (map11.map_Arr[i - 1, n] == " ")
+                            {
+                                map11.map_Arr[i - 1, n] = "G";
+                                map11.map_Arr[i, n] = " ";
+
+                                for (int b = 0; b < 5; b++)
+                                {
+                                    if (map11.enemies_Coords_X[b] == i & map11.enemies_Coords_Y[b] == n)
+                                    {
+                                        map11.enemies_Coords_X[b] -= 1;
+                                        //goblins_List[b] = Convert.ToString(map11.enemies_Coords_X[b] + "," + map11.enemies_Coords_Y[b]);
+                                    }
+                                }
+                            }
+                        }
+                        if (direction_G == 2)                  // down
+                        {
+                            if (map11.map_Arr[i + 1, n] == " ")
+                            {
+                                map11.map_Arr[i + 1, n] = "G";
+                                map11.map_Arr[i, n] = " ";
+
+                                for (int b = 0; b < 5; b++)
+                                {
+                                    if (map11.enemies_Coords_X[b] == i & map11.enemies_Coords_Y[b] == n)
+                                    {
+                                        map11.enemies_Coords_X[b] += 1;
+                                    }
+                                }
+                            }
+                        }
+                        if (direction_G == 3)                    //left
+                        {
+                            if (map11.map_Arr[i, n - 1] == " ")
+                            {
+                                map11.map_Arr[i, n - 1] = "G";
+                                map11.map_Arr[i, n] = " ";
+
+                                for (int b = 0; b < 5; b++)
+                                {
+                                    if (map11.enemies_Coords_X[b] == i & map11.enemies_Coords_Y[b] == n)
+                                    {
+                                        map11.enemies_Coords_Y[b] -= 1;
+                                    }
+                                }
+                            }
+                        }
+                        if (direction_G == 4)                    //right
+                        {
+                            if (map11.map_Arr[i, n + 1] == " ")
+                            {
+                                map11.map_Arr[i, n + 1] = "G";
+                                map11.map_Arr[i, n] = " ";
+
+                                for (int b = 0; b < 5; b++)
+                                {
+                                    if (map11.enemies_Coords_X[b] == i & map11.enemies_Coords_Y[b] == n)
+                                    {
+                                        map11.enemies_Coords_Y[b] += 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        private void friendly_Attack()
+        {
+            for (int i = 0; i < map11.map_Width; i++)
+            {
+                for (int n = 0; n < map11.map_Height; n++)
+                {
+                    if (map11.map_Arr[i, n] == "G")
+                    {
+                        if (map11.map_Arr[i - 1, n] == "M" || map11.map_Arr[i + 1, n] == "M" || //up / down
+                            map11.map_Arr[i, n - 1] == "M" || map11.map_Arr[i, n + 1] == "M" || //left / right
+                            map11.map_Arr[i - 1, n - 1] == "M" || map11.map_Arr[i - 1, n + 1] == "M" || //top_left / top_right
+                            map11.map_Arr[i + 1, n + 1] == "M" || map11.map_Arr[i + 1, n - 1] == "M")   //bottom_left / bottom_right
+                        {
+                            for (int b = 0; b < 5; b++)
+                            {
+                                string temp_GH = i + "," + n;
+                                if (map11.enemies_Coords_X[b] == i & map11.enemies_Coords_Y[b] == n)
+                                {
+                                    if (g_Health[b] > 0)
+                                    {
+                                        g_Health[b] -= 5;
+                                        attack_richTextBox.Text = ("Goblin got Hit for 5 " + '\n' + "Goblin HP: " + g_Health[b] + '\n' + "======================" + '\n' + attack_richTextBox.Text);
+                                    }
+                                    if (g_Health[b] <= 0)
+                                    {
+                                        map11.map_Arr[i, n] = " ";
+                                        attack_richTextBox.Text = ("Goblin Killed" + '\n' + "======================" + '\n' + attack_richTextBox.Text);
+                                        update_Map();
+                                    }
+                                }
+                            }                           
+                        }
+                    }
+                }
+            }
+        }
         private void my_Goblin_List()
         {
+            goblins_List.Clear();
             for (int i = 0; i < map11.map_Width; i++)
             {
                 for (int n = 0; n < map11.map_Height; n++)
@@ -208,26 +339,30 @@ namespace GADE_POE_task_1
             string temp_G = Convert.ToString(map11.hero_Coords_X + "," + map11.hero_Coords_Y);
             string temp_M = Convert.ToString(map11.hero_Coords_X + "," + map11.hero_Coords_Y);
 
-            if (goblins_List[0] == temp_G)
+            if (map11.map_Arr[map11.hero_Coords_X, map11.hero_Coords_Y] == "G")
             {
-                enemy = 1;
+                if (map11.enemies_Coords_X[0] == map11.hero_Coords_X & map11.enemies_Coords_Y[0] == map11.hero_Coords_Y)
+                {
+                    enemy = 1;
+                }
+                if (map11.enemies_Coords_X[1] == map11.hero_Coords_X & map11.enemies_Coords_Y[1] == map11.hero_Coords_Y)
+                {
+                    enemy = 2;
+                }
+                if (map11.enemies_Coords_X[2] == map11.hero_Coords_X & map11.enemies_Coords_Y[2] == map11.hero_Coords_Y)
+                {
+                    enemy = 3;
+                }
+                if (map11.enemies_Coords_X[3] == map11.hero_Coords_X & map11.enemies_Coords_Y[3] == map11.hero_Coords_Y)
+                {
+                    enemy = 4;
+                }
+                if (map11.enemies_Coords_X[4] == map11.hero_Coords_X & map11.enemies_Coords_Y[4] == map11.hero_Coords_Y)
+                {
+                    enemy = 5;
+                }
             }
-            if (goblins_List[1] == temp_G)
-            {
-                enemy = 2;
-            }
-            if (goblins_List[2] == temp_G)
-            {
-                enemy = 3;
-            }
-            if (goblins_List[3] == temp_G)
-            {
-                enemy = 4;
-            }
-            if (goblins_List[4] == temp_G)
-            {
-                enemy = 5;
-            }
+
 
             if (mage_List[0] == temp_M)
             {
@@ -567,6 +702,8 @@ namespace GADE_POE_task_1
             moveHero();
             check_Range();
             update_P_Stats();
+            friendly_Attack();
+            update_Map();
         }
 
         private void buttonLEFT1_Click(object sender, EventArgs e)
@@ -575,6 +712,8 @@ namespace GADE_POE_task_1
             moveHero();
             check_Range();
             update_P_Stats();
+            friendly_Attack();
+            update_Map();
         }
 
         private void buttonDown1_Click(object sender, EventArgs e)
@@ -583,6 +722,8 @@ namespace GADE_POE_task_1
             moveHero();
             check_Range();
             update_P_Stats();
+            friendly_Attack();
+            update_Map();
         }
 
         private void buttonRIGHT1_Click(object sender, EventArgs e)
@@ -591,6 +732,8 @@ namespace GADE_POE_task_1
             moveHero();
             check_Range();
             update_P_Stats();
+            friendly_Attack();
+            update_Map();
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -613,7 +756,7 @@ namespace GADE_POE_task_1
 
         private void select_enemy_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+           //my_Goblin_List();
         }
         public void check_Win()
         {
@@ -810,8 +953,8 @@ namespace GADE_POE_task_1
         public int prev_hero_Coords_Y;
 
         public int[] enemies_Arr;
-        public int[] enemies_Coords_X;
-        public int[] enemies_Coords_Y;
+        public int[] enemies_Coords_X = new int[5];
+        public int[] enemies_Coords_Y = new int[5];
 
         public int map_Width;
         public int map_Height;
@@ -893,6 +1036,8 @@ namespace GADE_POE_task_1
                 if (map_Arr[x, y] == " ")
                 {
                     map_Arr[x, y] = "G";
+                    enemies_Coords_X[i] = x;
+                    enemies_Coords_Y[i] = y;
                     list_Goblins.Add(Convert.ToString(x + "," + y));
                 }
             }
