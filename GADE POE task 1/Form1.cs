@@ -8,6 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace GADE_POE_task_1
 {
@@ -70,10 +73,6 @@ namespace GADE_POE_task_1
         private void Form1_Load(object sender, EventArgs e)
         {
 
-        }
-        private void Save()
-        {
-            
         }
         public void update_Map()
         {
@@ -956,8 +955,8 @@ namespace GADE_POE_task_1
         public int[] enemies_Coords_X = new int[5];
         public int[] enemies_Coords_Y = new int[5];
 
-        public int map_Width;
-        public int map_Height;
+        public int map_Width = 20;
+        public int map_Height = 20;
 
         public int[] map_Items = new int[5];
 
@@ -1120,6 +1119,14 @@ namespace GADE_POE_task_1
         public GameEngine()
         {
             
+        }
+        private void Save()
+        {
+
+        }
+        private void Load()
+        {
+
         }
     }
     public class Item
