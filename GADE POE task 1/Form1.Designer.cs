@@ -43,6 +43,9 @@ namespace GADE_POE_task_1
             this.groupBox_Player_Stats = new System.Windows.Forms.GroupBox();
             this.richTextBox_Player_Stats = new System.Windows.Forms.RichTextBox();
             this.select_enemy = new System.Windows.Forms.ComboBox();
+            this.labelAttack = new System.Windows.Forms.Label();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonLoad = new System.Windows.Forms.Button();
             this.groupBoxAttacking.SuspendLayout();
             this.groupBox_Player_Stats.SuspendLayout();
             this.SuspendLayout();
@@ -165,17 +168,49 @@ namespace GADE_POE_task_1
             "Under you",
             "On your Right",
             "On your Left"});
-            this.select_enemy.Location = new System.Drawing.Point(12, 399);
+            this.select_enemy.Location = new System.Drawing.Point(59, 403);
             this.select_enemy.Name = "select_enemy";
             this.select_enemy.Size = new System.Drawing.Size(121, 23);
             this.select_enemy.TabIndex = 9;
             this.select_enemy.SelectedIndexChanged += new System.EventHandler(this.select_enemy_SelectedIndexChanged);
             // 
+            // labelAttack
+            // 
+            this.labelAttack.AutoSize = true;
+            this.labelAttack.Location = new System.Drawing.Point(12, 406);
+            this.labelAttack.Name = "labelAttack";
+            this.labelAttack.Size = new System.Drawing.Size(41, 15);
+            this.labelAttack.TabIndex = 10;
+            this.labelAttack.Text = "Attack";
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Location = new System.Drawing.Point(59, 457);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(121, 23);
+            this.buttonSave.TabIndex = 11;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            // 
+            // buttonLoad
+            // 
+            this.buttonLoad.Location = new System.Drawing.Point(59, 486);
+            this.buttonLoad.Name = "buttonLoad";
+            this.buttonLoad.Size = new System.Drawing.Size(121, 23);
+            this.buttonLoad.TabIndex = 12;
+            this.buttonLoad.Text = "Load";
+            this.buttonLoad.UseVisualStyleBackColor = true;
+            this.buttonLoad.Click += new System.EventHandler(this.buttonLoad_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 509);
+            this.ClientSize = new System.Drawing.Size(800, 513);
+            this.Controls.Add(this.buttonLoad);
+            this.Controls.Add(this.buttonSave);
+            this.Controls.Add(this.labelAttack);
             this.Controls.Add(this.select_enemy);
             this.Controls.Add(this.groupBox_Player_Stats);
             this.Controls.Add(this.groupBoxAttacking);
@@ -197,7 +232,6 @@ namespace GADE_POE_task_1
         #endregion
 
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Label MapLabel;
         private System.Windows.Forms.Button buttonUP1;
         private System.Windows.Forms.Button buttonRIGHT1;
         private System.Windows.Forms.Button buttonLEFT1;
@@ -209,6 +243,10 @@ namespace GADE_POE_task_1
         private System.Windows.Forms.GroupBox groupBox_Player_Stats;
         private System.Windows.Forms.RichTextBox richTextBox_Player_Stats;
         private System.Windows.Forms.ComboBox select_enemy;
+        private System.Windows.Forms.Label labelAttack;
+        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button buttonLoad;
+        public System.Windows.Forms.Label MapLabel;
     }
 }
 
